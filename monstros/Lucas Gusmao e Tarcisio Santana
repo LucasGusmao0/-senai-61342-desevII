@@ -1,0 +1,53 @@
+print("Bem vido ao jogo")
+
+class Monstro:
+  def __init__(self, nome, tipo, pa, pd, pv, ge, ni):
+      self.nome = nome
+      self.tipo = tipo
+      self.pa = pa
+      self.pd = pd
+      self.pv = pv
+      self.ge = ge
+      self.ni = ni
+    
+  
+  def ataque(self):
+      return self.pa * self.ge * self.ni * 5
+  
+  def defesa(self):
+      return self.pd * self.ge * self.ni * 3
+  
+  def pontosVida(self):
+    pv = self.pv
+    return pv
+  
+
+class Batalha:
+  def __init__(self, a, d, v):
+      self.a = a
+      self.d = d
+      self.v =v
+      
+  
+  def resultado(self):
+    if self.a > self.d:
+      pontos = self.a - self.d
+      pv = self.v - pontos
+
+    
+    else:
+      pontos = self.d - self.a
+      pv = self.v - pontos
+ 
+    return pv
+  
+  
+monstro1 = Monstro ('Bubassauro', 'fogo', 25, 17, 60000, 10, 22)
+monstro2 = Monstro ('Picachu', 'eletrico', 20, 17, 60000, 18, 52)
+batalha = Batalha(monstro1.ataque(), monstro2.defesa(), monstro2.pontosVida())
+print ('O', monstro1.nome, 'tem pode de ataque de:',monstro1.ataque(), 'e poder de defesa de:', monstro1.defesa())
+print ('O', monstro2.nome, 'tem pode de ataque de:',monstro2.ataque(), 'e poder de defesa de:', monstro2.defesa())
+print ('O', monstro1.nome, 'ataca e o', monstro2.nome, 'defende:')
+print ('<<<<<<<<<<<<<<<Resultado >>>>>>>>>>>>>>>>>')
+
+print ('O', monstro2.nome, 'Ficou com:',batalha.resultado(), ' Pontos de vida')
