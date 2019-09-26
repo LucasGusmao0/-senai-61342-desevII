@@ -1,0 +1,144 @@
+from abc import ABC, abstractmethod
+
+
+class AbstractMassasFactory(ABC):
+
+    @abstractmethod
+    def criar_pizza_sabor(self):
+        pass
+
+    @abstractmethod
+    def criar_pizza_ingredientes(self):
+        pass
+
+
+class PedidosA(AbstractMassasFactory):
+
+    def criar_pizza_sabor(self):
+        return Calabresa()
+
+    def criar_pizza_ingredientes(self):
+        return CalabresaIngredientes()
+
+
+class PedidosB(AbstractMassasFactory):
+
+    def criar_pizza_sabor(self):
+        return Presunto()
+
+    def criar_pizza_ingredientes(self):
+        return PresuntoIngredientes()
+
+
+class AbstractMassasFactory2(ABC):
+    @abstractmethod
+    def criar_massa_tipo(self):
+        pass
+
+    @abstractmethod
+    def criar_massa_ingredientes(self):
+        pass
+
+
+class OrderC(AbstractMassasFactory2):
+
+    def criar_massa_tipo(self):
+        return Bolonhesa()
+
+    def criar_massa_ingredientes(self):
+        return BolonhesaIngredientes()
+
+
+class OrderD(AbstractMassasFactory2):
+
+    def criar_massa_tipo(self):
+        return Gororoba()
+
+    def criar_massa_ingredientes(self):
+        return GororobaIngredientes()
+
+
+class AbstractMassas(ABC):
+
+    @abstractmethod
+    def nome_pizza(self):
+        pass
+
+
+class Calabresa(AbstractMassas):
+    def nome_pizza(self):
+        return "Pizza de Calabresa"
+
+
+class CalabresaIngredientes(AbstractMassas):
+    def nome_pizza(self):
+        return "Queijo, Molho de tomate, Orégano e Calebresa"
+
+
+class Presunto(AbstractMassas):
+    def nome_pizza(self):
+        return "Pizza de Presunto"
+
+
+class PresuntoIngredientes(AbstractMassas):
+    def nome_pizza(self):
+        return "Queijo, Molho de tomate, Orégano, Azeitona e Presunto"
+
+
+class AbstractMassas2(ABC):
+
+    @abstractmethod
+    def nome_massa(self):
+        pass
+
+
+class Bolonhesa(AbstractMassas2):
+    def nome_massa(self):
+        return "Fuzilli a Bolonhesa"
+
+
+class BolonhesaIngredientes(AbstractMassas2):
+    def nome_massa(self):
+        return "Macarrão Fuzilli, Molho de Tomate e Carne Moída"
+
+
+class Gororoba(AbstractMassas2):
+
+    def nome_massa(self):
+        return "Super Gororoba!"
+
+
+class GororobaIngredientes(AbstractMassas2):
+
+    def nome_massa(self):
+        return "Tudo que vocÊ imaginar tem aqui!"
+
+
+def client_code(factory):
+    product_a = factory.criar_pizza_sabor()
+    product_b = factory.criar_pizza_ingredientes()
+
+    print(product_a.nome_pizza())
+    print(product_b.nome_pizza())
+
+
+def client_code2(factory):
+    product_a = factory.criar_massa_tipo()
+    product_b = factory.criar_massa_ingredientes()
+
+    print(product_a.nome_massa())
+    print(product_b.nome_massa())
+
+
+if __name__ == "__main__":
+    print("Preparando Pedido 1...")
+    client_code(PedidosA())
+
+    print("Preparando Pedido 2...")
+    client_code(PedidosB())
+
+    print("Preparando Pedido 3...")
+    client_code2(OrderC())
+
+    print("Preparando Pedido 4...")
+    client_code2(OrderD())
